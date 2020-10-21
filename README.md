@@ -14,7 +14,7 @@ can also receive it.  And folks receiving help can also give it.
 * React Diagrams
 * GraphQL (Apollo)
 * type-graphql library to add decorators for GraphQL schema
-* Deployed to AWS, Azure, or Google Cloud
+* Deployed to AWS, Azure, Google Cloud, or locally to Docker
 * Relevant Function as a Service (Lambda, etc.)
 * Relevant Relational Database
 * Relevant Authentication/Authorization
