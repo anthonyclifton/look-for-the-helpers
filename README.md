@@ -8,6 +8,7 @@ can also receive it.  And folks receiving help can also give it.
 ## technology
 
 * ReactJS
+* React Redux
 * NodeJS
 * Typescript
 * React Diagrams
@@ -17,3 +18,4 @@ can also receive it.  And folks receiving help can also give it.
 * Relevant Function as a Service (Lambda, etc.)
 * Relevant Relational Database
 * Relevant Authentication/Authorization
+* Test driven with Jest and Cypress
