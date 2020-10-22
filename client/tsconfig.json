@@ -1,0 +1,29 @@
+{
+  "compilerOptions": {
+    "suppressExcessPropertyErrors": true,
+    "declaration": false,
+    "strictNullChecks": false,
+    "sourceMap": true,
+    "skipLibCheck": true,
+    "skipDefaultLibCheck": true,
+    "moduleResolution": "node",
+    "noImplicitReturns": true,
+    "noImplicitThis": true,
+    "noImplicitAny": true,
+    "jsx": "react",
+    "target": "ES6",
+    "module": "commonjs",
+    "strict": false,
+    "lib": [
+      "DOM",
+      "ES6"
+    ]
+  },
+  "include": [
+    "./src"
+  ],
+  "exclude": [
+    "node_modules",
+    "build"
+  ]
+}
