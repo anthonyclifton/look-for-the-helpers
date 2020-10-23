@@ -24,11 +24,11 @@ const helpers = [
 const help = [
     {giving: 1, receiving: 3, what: "Food"},
     {giving: 2, receiving: 4, what: "Money"},
-    {giving: 3, receiving: 5, what: "Emotional Support"}
+    {giving: 3, receiving: 5, what: "Emotional Support"},
+    {giving: 3, receiving: 6, what: "Rent Assistance"}
 ];
 
 const nodes: Map<number, any> = new Map();
-const ports: Array<any> = [];
 const links: Array<any> = [];
 
 const handler = (event) => {
@@ -60,24 +60,24 @@ const App = () => {
             name: helper.name,
             color: 'rgb(0,0,0)'
         });
+
         const radius = 100;
         const x = radius *  Math.cos(toRadians(rotationPerHelper * index));
         const y = radius *  Math.sin(toRadians(rotationPerHelper * index));
-        console.log(helper.name + ": " + x + ", " + y);
+
         node.setPosition(100 + x, 100 + y);
         nodes.set(helper.id, node);
     });
 
     help.forEach((help, index) => {
-        const givingPort = nodes.get(help.giving).addOutPort('Giving');
-        const receivingPort = nodes.get(help.receiving).addInPort('Receiving');
+        const givingPort = nodes.get(help.giving).addOutPort('Giving' + help.giving + help.receiving);
+        const receivingPort = nodes.get(help.receiving).addInPort('Receiving' + help.giving + help.receiving);
         const link = new DefaultLinkModel();
-        link.setSourcePort(nodes.get(help.giving).getPort('Giving'));
-        link.setTargetPort(nodes.get(help.receiving).getPort('Receiving'));
+
+        link.setSourcePort(givingPort);
+        link.setTargetPort(receivingPort);
         link.addLabel(new DefaultLabelModel({label: help.what}));
 
-        ports.push(givingPort);
-        ports.push(receivingPort);
         links.push(link);
     });
 
