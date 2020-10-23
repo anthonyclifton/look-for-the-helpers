@@ -2,6 +2,7 @@
 import * as React from 'react';
 
 import createEngine, {
+    DefaultLabelModel,
     DefaultLinkModel,
     DefaultNodeModel,
     DiagramModel
@@ -10,7 +11,10 @@ import createEngine, {
 import { CanvasWidget } from '@projectstorm/react-canvas-core';
 import { DemoCanvasWidget} from "./DemoCanvasWidget";
 import styled from "@emotion/styled";
-import {LabelModel, LabelModelGenerics} from "@projectstorm/react-diagrams-core";
+
+const handler = (event) => {
+    console.log(event);
+}
 
 const App = () => {
     const FullscreenCanvas = styled(DemoCanvasWidget)`
@@ -23,10 +27,9 @@ const App = () => {
   width: 100vw;
 `;
 
-    // create an instance of the engine with all the defaults
     const engine = createEngine();
+    const model = new DiagramModel();
 
-    // node 1
     const node1 = new DefaultNodeModel({
         name: 'Node 1',
         color: 'rgb(0,0,0)',
@@ -34,7 +37,6 @@ const App = () => {
     node1.setPosition(100, 100);
     let port1 = node1.addOutPort('Out');
 
-    // node 2
     const node2 = new DefaultNodeModel({
         name: 'Node 2',
         color: 'rgb(0,192,255)',
@@ -43,13 +45,32 @@ const App = () => {
     let port2 = node2.addInPort('In');
     let port3 = node2.addOutPort('Out');
 
-    // link them and add a label to the link
-    const link = port1.link<DefaultLinkModel>(port2);
-    // console.log(link);
-    // link.addLabel(new LabelModel<LabelModelGenerics>());
+    const link1 = new DefaultLinkModel();
+    link1.setSourcePort(node1.getPort('Out'));
+    link1.setTargetPort(node2.getPort('In'));
 
-    const model = new DiagramModel();
-    model.addAll(node1, node2, link);
+    link1.addLabel(new DefaultLabelModel({label: 'testing'}));
+
+    const models = model.addAll(node1, node2, link1);
+
+    models.forEach((item) => {
+        item.registerListener({
+            eventDidFire: handler
+        });
+    });
+
+    model.registerListener({
+        eventDidFire: handler
+    });
+
+    port1.registerListener({
+        eventDidFire: handler
+    });
+
+    port2.registerListener({
+        eventDidFire: handler
+    });
+
     engine.setModel(model);
 
   return (
