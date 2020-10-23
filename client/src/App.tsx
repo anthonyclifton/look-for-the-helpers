@@ -22,12 +22,14 @@ const helpers = [
 ];
 
 const help = [
-    {giving: 1, receiving: 2, what: "Food"},
-    {giving: 2, receiving: 3, what: "Money"},
-    {giving: 3, receiving: 1, what: "Emotional Support"}
+    {giving: 1, receiving: 3, what: "Food"},
+    {giving: 2, receiving: 4, what: "Money"},
+    {giving: 3, receiving: 5, what: "Emotional Support"}
 ];
 
-const nodes = [];
+const nodes: Map<number, any> = new Map();
+const ports: Array<any> = [];
+const links: Array<any> = [];
 
 const handler = (event) => {
     console.log(event);
@@ -63,7 +65,20 @@ const App = () => {
         const y = radius *  Math.sin(toRadians(rotationPerHelper * index));
         console.log(helper.name + ": " + x + ", " + y);
         node.setPosition(100 + x, 100 + y);
-        nodes.push(node);
+        nodes.set(helper.id, node);
+    });
+
+    help.forEach((help, index) => {
+        const givingPort = nodes.get(help.giving).addOutPort('Giving');
+        const receivingPort = nodes.get(help.receiving).addInPort('Receiving');
+        const link = new DefaultLinkModel();
+        link.setSourcePort(nodes.get(help.giving).getPort('Giving'));
+        link.setTargetPort(nodes.get(help.receiving).getPort('Receiving'));
+        link.addLabel(new DefaultLabelModel({label: help.what}));
+
+        ports.push(givingPort);
+        ports.push(receivingPort);
+        links.push(link);
     });
 
     // const node1 = new DefaultNodeModel({
@@ -87,7 +102,7 @@ const App = () => {
     //
     // link1.addLabel(new DefaultLabelModel({label: 'testing'}));
 
-    const models = model.addAll(...nodes);
+    const models = model.addAll(...nodes.values(), ...links);
 
     models.forEach((item) => {
         item.registerListener({
