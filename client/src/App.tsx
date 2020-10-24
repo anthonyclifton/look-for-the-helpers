@@ -70,8 +70,16 @@ const App = () => {
     });
 
     help.forEach((help, index) => {
-        const givingPort = nodes.get(help.giving).addOutPort('Giving' + help.giving + help.receiving);
-        const receivingPort = nodes.get(help.receiving).addInPort('Receiving' + help.giving + help.receiving);
+        const givingNode = nodes.get(help.giving);
+        const receivingNode = nodes.get(help.receiving);
+        const givingHelper = helpers.find((helper) => {
+            return helper.id === help.giving
+        });
+        const receivingHelper = helpers.find((helper) => {
+            return helper.id === help.receiving
+        });
+        const givingPort = givingNode.addOutPort('To ' + receivingHelper.name);
+        const receivingPort = receivingNode.addInPort('From ' + givingHelper.name);
         const link = new DefaultLinkModel();
 
         link.setSourcePort(givingPort);
