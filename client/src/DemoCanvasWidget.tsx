@@ -44,7 +44,7 @@ export const Container = styled.div<{ color: string; background: string }>`
                 transparent
             );
     `;
-//}
+// }
 
 export class DemoCanvasWidget extends React.Component<DemoCanvasWidgetProps> {
     render() {
@@ -54,6 +54,6 @@ export class DemoCanvasWidget extends React.Component<DemoCanvasWidgetProps> {
                 color={this.props.color || 'rgba(255,255,255, 0.05)'}>
                     {this.props.children}
             </Container>
-    );
+        );
     }
 }

@@ -149,5 +149,10 @@
     "presets": [
       "react-app"
     ]
+  },
+  "devDependencies": {
+    "@projectstorm/react-diagrams": "^6.2.0",
+    "@types/jest": "^26.0.15",
+    "ts-jest": "^26.4.3"
   }
 }
