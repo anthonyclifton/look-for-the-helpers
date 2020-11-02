@@ -25,10 +25,12 @@ export default class App extends React.Component<any, any>{
     private helpers: Array<any> = [
         {id: 1, name: "Bob"},
         {id: 2, name: "Mary"},
+        {id: 3, name: "Fred"}
     ];
 
     private help: Array<any> = [
         {giving: 1, receiving: 2, what: "Food"},
+        {giving: 2, receiving: 3, what: "Medical Assistance"}
     ];
 
     constructor() {
@@ -40,7 +42,7 @@ export default class App extends React.Component<any, any>{
     public render() {
         return (
             <Container>
-                <p data-testid={"testing"}>testing</p>
+                <p data-testid={"header"}>look-for-the-helpers</p>
                 <FullscreenCanvas>
                     <CanvasWidget engine={this.diagramEngine}/>
                 </FullscreenCanvas>
@@ -52,17 +54,14 @@ export default class App extends React.Component<any, any>{
         this.activeModel = new SRD.DiagramModel();
         this.diagramEngine.setModel(this.activeModel);
 
-        const rotationPerHelper = 360 / this.helpers.length;
-
         this.helpers.forEach((helper, index) => {
             const node = new SRD.DefaultNodeModel({
                 name: helper.name,
                 color: 'rgb(0,0,0)'
             });
 
-            const radius = 100;
-            const x = 100;
-            const y = 100;
+            const x = 100 + index * 100;
+            const y = 100 + index * 100;
 
             node.setPosition(100 + x, 100 + y);
             this.nodes.set(helper.id, node);
@@ -101,18 +100,6 @@ export default class App extends React.Component<any, any>{
         });
 
         this.activeModel.addAll(models);
-    }
-
-    private getActiveDiagram(): SRD.DiagramModel {
-        return this.activeModel;
-    }
-
-    private getDiagramEngine(): SRD.DiagramEngine {
-        return this.diagramEngine;
-    }
-
-    private toRadians(angle) {
-        return angle * (Math.PI / 180);
     }
 
     private handleEvent (event) {
