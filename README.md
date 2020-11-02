@@ -8,6 +8,7 @@ can also receive it.  And folks receiving help can also give it.
 ## how to run
 
 ```
+cd client
 npm install
 npm run start
 ```
