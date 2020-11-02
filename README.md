@@ -10,7 +10,9 @@ can also receive it.  And folks receiving help can also give it.
 * ReactJS
 * React Redux
 * React Diagrams
+    * [Using the Library](https://projectstorm.gitbook.io/react-diagrams/getting-started/using-the-library)
     * [Testing](https://projectstorm.gitbooks.io/react-diagrams/content/docs/Testing.html)
+    * [React-Diagrams Github](https://github.com/projectstorm/react-diagrams/tree/v5.3.2)
 * NodeJS
 * GraphQL (Apollo)
 * Typescript
